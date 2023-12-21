@@ -1,10 +1,12 @@
-def FindMissingNumber(arr):
-    x=-1
-    for num in arr:
-        x+=1
-        if(x!=num):
-            return x
+def FindMissingNumber(nums):
+    n = len(nums) + 1 
+    expected_sum = n * (n + 1) // 2  
 
-            
-input_array = [3, 0, 1]
-print(FindMissingNumber(input_array))
+    actual_sum = sum(nums)
+
+    return expected_sum - actual_sum
+
+
+numbers = [1, 2, 4, 6, 3, 7, 8]
+MissNum = FindMissingNumber(numbers)
+print(f"missing number: {MissNum}")
