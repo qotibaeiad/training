@@ -21,8 +21,7 @@ class Graph:
 
     def BFS(self,start):
         visited = set()
-        queue = stack([start]) # or | queue = stack() 
-                               #    | queue.append(astart)
+        queue = stack([start])
         while queue:
             vertex = queue.popleft()
             if vertex not in visited:
@@ -41,6 +40,41 @@ g.add_neighbor("umm-el-fahem", "ar'ara")
 g.add_neighbor("ramat-gan", "umm-el-fahem")
 g.add_neighbor("ar'ara","ramat-gan")
 g.BFS("umm-el-fahem")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""
+    def BFS(self,start):
+        visited = set()
+        queue = stack([start]) # or | queue = stack() 
+                               #    | queue.append(astart)
+        while queue:
+            vertex = queue.popleft()
+            if vertex not in visited:
+                print(vertex,end=' ')
+                visited.add(vertex)
+                for neighbor in self.graph.get(vertex,[]):
+                    if neighbor not in visited:
+                        queue.append(neighbor)
+"""
+
 
 
 
