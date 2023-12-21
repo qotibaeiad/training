@@ -23,7 +23,6 @@ class Graph:
         visited = set()
         queue = stack([start]) # or | queue = stack() 
                                #    | queue.append(astart)
-        queue.append(start)
         while queue:
             vertex = queue.popleft()
             if vertex not in visited:
@@ -36,11 +35,12 @@ class Graph:
 
 g = Graph()
 
-g.add_neighbor(0, 1)
-g.add_neighbor(0, 3)
-g.add_neighbor(3, 1)
-g.add_neighbor(2, 1)
-g.BFS(0)
+g.add_neighbor("tel-aviv", "ramat-gan")
+g.add_neighbor("ramat-gan", "ramat-hasharon")
+g.add_neighbor("umm-el-fahem", "ar'ara")
+g.add_neighbor("ramat-gan", "umm-el-fahem")
+g.add_neighbor("ar'ara","ramat-gan")
+g.BFS("umm-el-fahem")
 
 
 
