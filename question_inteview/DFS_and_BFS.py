@@ -33,7 +33,6 @@ class Graph:
 
 
 g = Graph()
-
 g.add_neighbor("tel-aviv", "ramat-gan")
 g.add_neighbor("ramat-gan", "ramat-hasharon")
 g.add_neighbor("umm-el-fahem", "ar'ara")
