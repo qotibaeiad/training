@@ -39,6 +39,8 @@ g.add_neighbor("umm-el-fahem", "ar'ara")
 g.add_neighbor("ramat-gan", "umm-el-fahem")
 g.add_neighbor("ar'ara","ramat-gan")
 g.BFS("umm-el-fahem")
+print()
+g.DFS("umm-el-fahem")
 
 
 
