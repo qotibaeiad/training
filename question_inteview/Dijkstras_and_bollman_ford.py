@@ -1,72 +1,58 @@
 import heapq
 
 class Graph:
-    def __init__(self, vertices):
-        self.V = vertices
-        self.graph = {}
+    def __init__(self):
+        self.nodes = set()
+        self.edges = {}
 
-    def add_edge(self, u, v, w):
-        if u not in self.graph:
-            self.graph[u]=[]
-        self.graph[u].append((v, w, 0))
+    def add_node(self, value):
+        self.nodes.add(value)
+        self.edges[value] = []
 
-    def bellman_ford(self, src):
-        distance = [float("inf")] * self.V
-        distance[self.graph[src][2]] = 0
+    def add_edge(self, from_node, to_node, distance):
+        self.edges[from_node].append((to_node, distance))
 
-        for _ in range(self.V - 1):
-            for u, v, w in self.graph_edges():
-                if distance[u] != float("inf") and distance[u] + w < distance[v]:
-                    distance[v] = distance[u] + w
+    def dijkstra(self, start):
+        priority_queue = [(0, start)]
+        visited = set()
+        distances = {node: float('infinity') for node in self.nodes}
+        distances[start] = 0
 
-        for u, v, w in self.graph_edges():
-            if distance[u] != float("inf") and distance[u] + w < distance[v]:
-                print("Graph contains negative-weight cycle")
-                return
-
-        print("Bellman-Ford Algorithm:")
-        print("Vertex \t Distance from Source")
-        for i in range(self.V):
-            print(f"{i}\t\t{distance[i]}")
-
-    def dijkstra(self, src):
-        priority_queue = [(0, src)]
-        distance = [float("inf")] * self.V
         while priority_queue:
-            current_distance, current_vertex = heapq.heappop(priority_queue)
+            (current_distance, current_node) = heapq.heappop(priority_queue)
 
-            if current_distance > distance[current_vertex]:
+            if current_node in visited:
                 continue
 
-            for neighbor, weight in self.graph[current_vertex]:
-                new_distance = current_distance + weight
-                if new_distance < distance[neighbor]:
-                    distance[neighbor] = new_distance
-                    heapq.heappush(priority_queue, (new_distance, neighbor))
+            visited.add(current_node)
 
-        print("\nDijkstra's Algorithm:")
-        print("Vertex \t Distance from Source")
-        for i in range(self.V):
-            print(f"{i}\t\t{distance[i]}")
+            for (neighbor, weight) in self.edges[current_node]:
+                if neighbor not in visited:
+                    new_distance = current_distance + weight
+                    if new_distance < distances[neighbor]:
+                        distances[neighbor] = new_distance
+                        heapq.heappush(priority_queue, (new_distance, neighbor))
 
-    def graph_edges(self):
-        edges = []
-        for u in self.graph:
-            for v, w in self.graph[u]:
-                edges.append((u, v, w))
-        return edges
+        print(f"Shortest distances from {start}: {distances}")
 
+cities_graph = Graph()
 
-g = Graph(7)
-g.add_edge('Tell-aviv', 'ramat-hsharon', 1)
-g.add_edge('ramat-gan', 'ramat-hsharon', 4)
-g.add_edge('umm-el-fahem', 'Tell-aviv', 3)
-g.add_edge('givataytem', 'ramat-gan', 2)
-g.add_edge('givataytem', 'ramat-hsharon', 2)
-g.add_edge('Tell-aviv', 'ramat-gan', 5)
-g.add_edge('same', 'Tell-aviv', 1)
-g.add_edge('arrar', 'umm-el-fahem', 3)
+cities_graph.add_node('Tell-aviv')
+cities_graph.add_node('ramat-hsharon')
+cities_graph.add_node('ramat-gan')
+cities_graph.add_node('umm-el-fahem')
+cities_graph.add_node('givataytem')
+cities_graph.add_node('same') 
+cities_graph.add_node('arrar') 
+
+cities_graph.add_edge('Tell-aviv', 'ramat-hsharon', 1)
+cities_graph.add_edge('ramat-gan', 'ramat-hsharon', 4)
+cities_graph.add_edge('umm-el-fahem', 'Tell-aviv', 3)
+cities_graph.add_edge('givataytem', 'ramat-gan', 2)
+cities_graph.add_edge('givataytem', 'ramat-hsharon', 2)
+cities_graph.add_edge('Tell-aviv', 'ramat-gan', 5)
+cities_graph.add_edge('same', 'Tell-aviv', 1)
+cities_graph.add_edge('arrar', 'umm-el-fahem', 3)
 
 start_vertex = 'arrar'
-#g.bellman_ford(start_vertex)
-g.dijkstra(start_vertex)
+cities_graph.dijkstra(start_vertex)
