@@ -3,14 +3,16 @@ import heapq
 class Graph:
     def __init__(self, vertices):
         self.V = vertices
-        self.graph = {i: [] for i in range(vertices)}
+        self.graph = {}
 
     def add_edge(self, u, v, w):
-        self.graph[u].append((v, w))
+        if u not in self.graph:
+            self.graph[u]=[]
+        self.graph[u].append((v, w, 0))
 
     def bellman_ford(self, src):
         distance = [float("inf")] * self.V
-        distance[src] = 0
+        distance[self.graph[src][2]] = 0
 
         for _ in range(self.V - 1):
             for u, v, w in self.graph_edges():
@@ -30,8 +32,6 @@ class Graph:
     def dijkstra(self, src):
         priority_queue = [(0, src)]
         distance = [float("inf")] * self.V
-        distance[src] = 0
-
         while priority_queue:
             current_distance, current_vertex = heapq.heappop(priority_queue)
 
@@ -57,27 +57,16 @@ class Graph:
         return edges
 
 
-g = Graph(5)
-g.add_edge(0, 1, 1)
-g.add_edge(0, 2, 4)
-g.add_edge(1, 2, 3)
-g.add_edge(1, 3, 2)
-g.add_edge(1, 4, 2)
-g.add_edge(3, 2, 5)
-g.add_edge(3, 1, 1)
-g.add_edge(4, 3, 3)
+g = Graph(7)
+g.add_edge('Tell-aviv', 'ramat-hsharon', 1)
+g.add_edge('ramat-gan', 'ramat-hsharon', 4)
+g.add_edge('umm-el-fahem', 'Tell-aviv', 3)
+g.add_edge('givataytem', 'ramat-gan', 2)
+g.add_edge('givataytem', 'ramat-hsharon', 2)
+g.add_edge('Tell-aviv', 'ramat-gan', 5)
+g.add_edge('same', 'Tell-aviv', 1)
+g.add_edge('arrar', 'umm-el-fahem', 3)
 
-start_vertex = 0
-g.bellman_ford(start_vertex)
-
-g = Graph(5)
-g.add_edge(0, 1, 2)
-g.add_edge(0, 2, 4)
-g.add_edge(1, 2, 3)
-g.add_edge(1, 3, 2)
-g.add_edge(1, 4, 2)
-g.add_edge(3, 2, 5)
-g.add_edge(3, 1, 1)
-g.add_edge(4, 3, 2)
-
+start_vertex = 'arrar'
+#g.bellman_ford(start_vertex)
 g.dijkstra(start_vertex)

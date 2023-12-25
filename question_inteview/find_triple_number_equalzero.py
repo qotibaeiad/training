@@ -21,6 +21,6 @@ class Solution:
 
 # Example usage:
 solution = Solution()
-nums = [-1, 0, 1, 2, -1, -4, -3, 3, 1, 1]
-result = solution.find_triplets_with_zero_sum(nums,2)
+nums = [-1, 0, 1, 2, -1, -4, -3, 3, 1]
+result = solution.find_triplets_with_zero_sum(nums,4)
 print(result)
