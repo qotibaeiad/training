@@ -8,7 +8,7 @@ class Solution:
         for i in range(len(nums)-2):
             left , right = i+1,len(nums)-1
             while left < right:
-                sum = sorted_array[i] +  sorted_array[left] + sorted_array[right]
+                sum = sorted_array[i] + sorted_array[left] + sorted_array[right]
                 if  sum>target:
                     right-=1
                 elif sum<target:

@@ -2,7 +2,6 @@ def Common_Prefix(strs):
     if not strs:
         return ""
     prefix = strs[0]
-
     for st in strs[1:]:
         i = 0
         while i < len(prefix) and i < len(st) and prefix[i] == st[i]:
