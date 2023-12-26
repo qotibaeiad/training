@@ -1,11 +1,9 @@
 class Solution:
     def __init__(self, strs):
-        self.map = {}
-        for s in strs:
-            self.map[s] = s
+        self.list = strs
 
     def isDinct(self, string):
-        for s in self.map.values():
+        for s in self.list:
             if len(string)<=len(s):
                 i=0
                 tmp = True
