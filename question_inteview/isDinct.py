@@ -1,9 +1,13 @@
 class Solution:
     def __init__(self, strs):
-        self.list = strs
+        self.map = {}
+        for s in strs:
+            self.map[s] = s
 
     def isDinct(self, string):
-        for s in self.list:
+        if string in self.map:
+            return True
+        for s in self.map.values():
             if len(string)<=len(s):
                 i=0
                 tmp = True
@@ -21,4 +25,4 @@ class Solution:
         return False
 
 g = Solution(["apple", "plssd", "cat"])
-print(g.isDinct("pl*sd"))
+print(g.isDinct("pl*d"))
