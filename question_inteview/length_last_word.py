@@ -13,5 +13,4 @@ class Solution(object):
                 print(cnt)
             if tmp==False:
                 i+=1
-            
         return cnt
