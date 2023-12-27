@@ -23,6 +23,6 @@ class Solution:
                 if i+1==len(s):
                     return True
         return False
-
+        
 g = Solution(["apple", "plssd", "cat"])
 print(g.isDinct("pl*d"))
